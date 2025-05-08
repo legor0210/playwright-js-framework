@@ -13,6 +13,27 @@ test.describe('Login Feature Tests', () => {
     await expect(page.locator('#user-name')).toBeVisible();
   });
 
+  test('should have blank username validation', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+    await page.click('#login-button');
+    await expect(page.locator('[data-test="error"]')).toContainText('Username is required');
+  });
+
+  test('should have blank password validation', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+    await page.fill('#user-name',  testData[0].username);
+    await page.click('#login-button');
+    await expect(page.locator('[data-test="error"]')).toContainText('Password is required');
+  });
+
+  test('should have invalid credentials validation', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/');
+    await page.fill('#user-name',  testData[0].username);
+    await page.fill('#password', "invalid");
+    await page.click('#login-button');
+    await expect(page.locator('[data-test="error"]')).toContainText('Username and password do not match any user in this service');
+  });
+
   // Dynamic login tests using external test data
   test.describe('User Login Tests', () => {
     testData.forEach(user => {

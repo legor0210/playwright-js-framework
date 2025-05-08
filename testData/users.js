@@ -12,5 +12,11 @@ module.exports = [
       expectedUrl: 'https://www.saucedemo.com/',
       shouldLogin: false,
       errorMessage: 'Epic sadface: Sorry, this user has been locked out.'
+    },
+    {
+      username: 'visual_user',
+      password: 'secret_sauce',
+      expectedUrl: 'https://www.saucedemo.com/',
+      shouldLogin: true,
     }
   ];
